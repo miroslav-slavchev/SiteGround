@@ -7,10 +7,10 @@ namespace SiteGround.Application.UiElements.Buttons.SwitchButtons
         protected override string PositiveIcon => "eye";
         protected override string NegativeIcon => "eye-cross";
 
-        public async Task<bool> ShownAsync() => await PositiveStateAsync();
+        public async Task<bool> IsShownAsync() => await PositiveStateAsync();
         public async Task<bool> HiddenAsync() => await NegativeStateAsync();
 
-        public async Task ShowAsync() => await PositiveSwitchAsync();
-        public async Task HideAsync() => await NegativeSwitchAsync();
+        public async Task IsShowAsync() => await PositiveSwitchAsync();
+        public async Task IsHideAsync() => await NegativeSwitchAsync();
     }
 }

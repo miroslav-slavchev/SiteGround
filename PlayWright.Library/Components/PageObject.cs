@@ -11,7 +11,7 @@ namespace PlayWright.Library.Components
             return pageObject;
         }
 
-        protected PageObjectList<TPageObject> InnerPageObjects<TPageObject>(By? by = null) where TPageObject : PageObject
+        protected PageObjectList<TPageObject> InnerPageObjects<TPageObject>(By? by = null, Func<Task<bool>>? precondition = null, bool skipDefaultWait = false) where TPageObject : PageObject
         {
             SearchContext childSearchContext = SearchContext.GetChildSearchContext(Locator);
             if (by == null)
@@ -19,7 +19,7 @@ namespace PlayWright.Library.Components
                 var tempObject = Construct<TPageObject>(null, childSearchContext);
                 by = tempObject.By;
             }
-            PageObjectList<TPageObject> pageObjects = new(childSearchContext, by);
+            PageObjectList<TPageObject> pageObjects = new(childSearchContext, by, precondition, skipDefaultWait);
             return pageObjects;
         }
 
@@ -32,8 +32,8 @@ namespace PlayWright.Library.Components
             return element;
         }
 
-        protected UiElementList UiElements(By? by = null) => new(SearchContext.GetChildSearchContext(Locator), by);
-        protected UiElementList<TUiElement> UiElements<TUiElement>(By? by = null) where TUiElement : UiElement
+        protected UiElementList UiElements(By? by = null, Func<Task<bool>>? precondition = null, bool skipDefaultWait = false) => new(SearchContext.GetChildSearchContext(Locator), by, precondition, skipDefaultWait);
+        protected UiElementList<TUiElement> UiElements<TUiElement>(By? by = null, Func<Task<bool>>? precondition = null, bool skipDefaultWait = false) where TUiElement : UiElement
         {
             if (by == null)
             {
@@ -41,7 +41,7 @@ namespace PlayWright.Library.Components
                 by = tempElement.By;
             }
             SearchContext childSearchContext = SearchContext.GetChildSearchContext(Locator);
-            UiElementList<TUiElement> elements = new(childSearchContext, by);
+            UiElementList<TUiElement> elements = new(childSearchContext, by, precondition, skipDefaultWait);
             return elements;
         }
 

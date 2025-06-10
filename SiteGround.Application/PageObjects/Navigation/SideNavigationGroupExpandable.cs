@@ -9,7 +9,7 @@ namespace SiteGround.Application.PageObjects.Navigation
 
         public UiElementList<UiElement> SubPages => UiElements<UiElement>(Locate.By("css=li.sg-navigation-list__item"));
 
-        public async Task<UiElement> ActiveSubPage()
+        public async Task<UiElement> ActiveSubPageAsync()
         {
             return await SubPages.FirstOrDefaultAsync(async subPage => (await subPage.GetAttributeAsync("class"))!.Contains("sg-navigation-list__item--active"))
                 ?? throw new Exception("No active page");

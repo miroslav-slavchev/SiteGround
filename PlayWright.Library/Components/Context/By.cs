@@ -59,6 +59,13 @@ namespace PlayWright.Library.Components.Context
             return this;
         }
 
+        public ByBuilder WithText(string text)
+        {
+            Options ??= new LocatorLocatorOptions();
+            Options.HasText = text;
+            return this;
+        }
+
         public ByBuilder WithWaitOptions(LocatorWaitForOptions? waitOptions)
         {
             WaitOptions = waitOptions;

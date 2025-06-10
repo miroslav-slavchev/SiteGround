@@ -7,8 +7,8 @@ namespace SiteGround.Application.UiElements.Buttons.SwitchButtons
         protected override string PositiveIcon => "arrow-up";
         protected override string NegativeIcon => "arrow-down";
 
-        public async Task<bool> ExpandedAsync() => await PositiveStateAsync();
-        public async Task<bool> CollapsedAsync() => await NegativeStateAsync();
+        public async Task<bool> IsExpandedAsync() => await PositiveStateAsync();
+        public async Task<bool> IsCollapsedAsync() => await NegativeStateAsync();
 
         public async Task ExpandAsync() => await PositiveSwitchAsync();
         public async Task CollapseAsync() => await NegativeSwitchAsync();

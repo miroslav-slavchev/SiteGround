@@ -17,11 +17,7 @@ namespace SiteGround.Application.PageObjects.Email.Accounts
         public async Task CreateAsync()
         {
             await Create.ClickAsync();
-            await LoadSpinner.WaitForAsync(new()
-            {
-                State = Microsoft.Playwright.WaitForSelectorState.Hidden,
-                Timeout = 5000
-            });
+            await LoadSpinner.WaitToBeHiiden();
         }
 
         public Notification Notification => InnerPageObject<Notification>(Locate.By("css=div.sg-box-notification"));
