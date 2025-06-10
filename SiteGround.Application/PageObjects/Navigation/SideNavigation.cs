@@ -36,15 +36,15 @@ namespace SiteGround.Application.PageObjects.Navigation
     {
         public SideNavigation Navigation { get; } = navigation;
 
-        public async Task EmailPageAsync(string subPage) => await Navigation.NavigateAsync("Email");
-        public async Task EmailSubPageAsync(string subPage) => await Navigation.NavigateAsync("Email", subPage);
-        public async Task AccountsAsync() => await EmailSubPageAsync("Accounts");
-        public async Task ForwardersAsync() => await EmailSubPageAsync("Forwarders");
-        public async Task AutorespondersAsync() => await EmailSubPageAsync("Autoresponders");
-        public async Task FiltersAsync() => await EmailSubPageAsync("Filters");
-        public async Task AuthenticationAsync() => await EmailSubPageAsync("Authentication");
-        public async Task SpamProtectionAsync() => await EmailSubPageAsync("Spam Protection");
-        public async Task EmailMigratorAsync() => await EmailSubPageAsync("Email Migrator");
+        public async Task ClickEmailPageAsync(string subPage) => await Navigation.NavigateAsync("Email");
+        public async Task ClickEmailSubPageAsync(string subPage) => await Navigation.NavigateAsync("Email", subPage);
+        public async Task ClickAccountsAsync() => await ClickEmailSubPageAsync("Accounts");
+        public async Task ClickForwardersAsync() => await ClickEmailSubPageAsync("Forwarders");
+        public async Task ClickAutorespondersAsync() => await ClickEmailSubPageAsync("Autoresponders");
+        public async Task ClickFiltersAsync() => await ClickEmailSubPageAsync("Filters");
+        public async Task ClickAuthenticationAsync() => await ClickEmailSubPageAsync("Authentication");
+        public async Task ClickSpamProtectionAsync() => await ClickEmailSubPageAsync("Spam Protection");
+        public async Task ClickEmailMigratorAsync() => await ClickEmailSubPageAsync("Email Migrator");
 
     }
 }

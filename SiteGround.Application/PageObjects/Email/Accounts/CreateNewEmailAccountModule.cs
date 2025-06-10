@@ -11,12 +11,12 @@ namespace SiteGround.Application.PageObjects.Email.Accounts
     {
         public TextInputField AccountName => InnerPageObject<TextInputField>(Locate.By("css=label[data-e2e=text-input-name-label]"));
         public FormPasswordField Password => InnerPageObject<FormPasswordField>(Locate.By("css=label[data-e2e=form-password-password-label]"));
-        public Button Create => UiElement<Button>(Locate.By("css=button[data-e2e=create-box-submit]"));
+        public Button CreateButton => UiElement<Button>(Locate.By("css=button[data-e2e=create-box-submit]"));
         public LoadSpinner LoadSpinner => UiElement<LoadSpinner>();
 
-        public async Task CreateAsync()
+        public async Task ClickCreateButtonAsync()
         {
-            await Create.ClickAsync();
+            await CreateButton.ClickAsync();
             await LoadSpinner.WaitToBeHiiden();
         }
 

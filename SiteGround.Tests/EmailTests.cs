@@ -21,7 +21,7 @@ namespace SiteGround.Tests
             await App.EmailPage.Accounts.CreateNewEmailAccount.Password.Generate.ClickAsync();
             string filledPassword = await App.EmailPage.Accounts.CreateNewEmailAccount.Password.Input.InputValueAsync();
 
-            await App.EmailPage.Accounts.CreateNewEmailAccount.CreateAsync();
+            await App.EmailPage.Accounts.CreateNewEmailAccount.ClickCreateButtonAsync();
 
             //Assert
             Verify.All(async () =>
@@ -55,10 +55,10 @@ namespace SiteGround.Tests
             List<string> expectedOptions = ["qa-automation-tools.com", "store.qa-automation-tools.com", "parked-qa-automation-tools.com", "site-tools-demo.net"];
 
             //Act
-            await App.SideNavigation.Email.ForwardersAsync();
+            await App.SideNavigation.Email.ClickForwardersAsync();
             var options = await App.EmailPage.Forwarders.SelectDomain.DropDown.OptionsTextContentAsync();
             await App.EmailPage.Forwarders.SelectDomain.DropDown.SelectOptionAsync(domain);
-            await App.EmailPage.Forwarders.CreateNewRule.Create.ClickAsync();
+            await App.EmailPage.Forwarders.CreateNewRule.CreateButton.ClickAsync();
             var validationError = await App.EmailPage.Forwarders.CreateNewRule.ForwardAllMessagesSentTo.ValidationError.PresentAsync();
 
             //Assert
