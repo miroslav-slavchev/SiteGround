@@ -7,12 +7,12 @@ using SiteGround.Application.PageObjects.DashBoard;
 
 namespace SiteGround.Application
 {
-    public class App(BrowserSession browserSession)
+    public class App(BrowserPageSession browserSession)
     {
-        private ILocator Body => BrowserSession.Page.Locator("css=body");
-        private SearchContext BodyContext => new(browserSession: BrowserSession, parent: null, root: Body);
+        private ILocator Body => BrowserPageSession.Page.Locator("css=body");
+        private SearchContext BodyContext => new(browserSession: BrowserPageSession, parent: null, root: Body);
 
-        public BrowserSession BrowserSession { get; } = browserSession;
+        public BrowserPageSession BrowserPageSession { get; } = browserSession;
 
         public SideNavigation SideNavigation => new(BodyContext);
 
