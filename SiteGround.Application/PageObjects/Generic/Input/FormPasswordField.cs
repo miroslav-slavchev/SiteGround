@@ -9,9 +9,9 @@ namespace SiteGround.Application.PageObjects.Generic.Input
     public class FormPasswordField(SearchContext searchContext, By by) : PageObject(searchContext, by)
     {
         public TextInput Input => UiElement<TextInput>(Locate.By("css=input[data-e2e=form-password-password]"));
-        public ShowHideButton ShowOrHide => UiElement<ShowHideButton>();
-        public Button Generate => UiElement<Button>(Locate.By("css=button[data-e2e=password-generate]"));
-        public Button Copy => UiElement<Button>(Locate.BySelector("css=button").WithText("Copy").Build());
-        public Button ReGenerate => UiElement<Button>(Locate.By("css=span[data-icon=refresh]"));
+        public ShowHideButton ShowOrHideButton => UiElement<ShowHideButton>();
+        public Button GenerateButton => UiElement<Button>(Locate.By("css=button[data-e2e=password-generate]"));
+        public Button CopyButton => UiElement<Button>(Locate.BySelector("css=button").WithText("Copy").Build());
+        public Button ReGenerateButton => UiElement<Button>(Locate.By("css=span[data-icon=refresh]"));
     }
 }

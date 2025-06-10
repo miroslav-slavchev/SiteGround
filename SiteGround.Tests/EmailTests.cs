@@ -18,7 +18,7 @@ namespace SiteGround.Tests
             string accountAddOn = await App.EmailPage.Accounts.CreateNewEmailAccount.AccountName.AddOn.TextContentAsync();
             await App.EmailPage.Accounts.CreateNewEmailAccount.AccountName.Input.FillAsync(accountName);
 
-            await App.EmailPage.Accounts.CreateNewEmailAccount.Password.Generate.ClickAsync();
+            await App.EmailPage.Accounts.CreateNewEmailAccount.Password.GenerateButton.ClickAsync();
             string filledPassword = await App.EmailPage.Accounts.CreateNewEmailAccount.Password.Input.InputValueAsync();
 
             await App.EmailPage.Accounts.CreateNewEmailAccount.ClickCreateButtonAsync();
