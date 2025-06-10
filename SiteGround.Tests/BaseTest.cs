@@ -13,7 +13,7 @@ namespace SiteGround.Tests
         [OneTimeSetUp]
         public async Task Setup()
         {
-            BrowserSession browserSession = await StartBrowserSessionAsync();
+            BrowserPageSession browserSession = await StartBrowserSessionAsync();
             App = new(browserSession);
 
             var page = browserSession.Page;
@@ -24,7 +24,7 @@ namespace SiteGround.Tests
             await page.GotoAsync(fullUrl);
         }
 
-        private async Task<BrowserSession> StartBrowserSessionAsync()
+        private async Task<BrowserPageSession> StartBrowserSessionAsync()
         {
             var playwright = await Playwright.CreateAsync();
             var browser = await playwright.Chromium.LaunchAsync(new()
@@ -34,14 +34,14 @@ namespace SiteGround.Tests
             var browserContext = await browser.NewContextAsync();
             var page = await browserContext.NewPageAsync();
 
-            BrowserSession browserSession = new(playwright, page);
-            return browserSession;
+            BrowserPageSession browserPageSession = new(playwright, page);
+            return browserPageSession;
         }
 
         [OneTimeTearDown]
         public async Task CleanUp()
         {
-            await App.BrowserSession.Browser.CloseAsync();
+            await App.BrowserPageSession.Browser.CloseAsync();
         }
     }
 }
