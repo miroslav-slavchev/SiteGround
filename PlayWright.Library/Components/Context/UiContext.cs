@@ -2,7 +2,7 @@
 
 namespace PlayWright.Library.Components.Context
 {
-    public partial class UiContext(SearchContext searchContext, By by)
+    public abstract partial class UiContext(SearchContext searchContext, By by)
     {
         public string Name => GetType().Name;
 
