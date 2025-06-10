@@ -13,7 +13,7 @@ namespace SiteGround.Application.PageObjects.Navigation
             var page = await Pages.FirstOrDefaultAsync(async page => await page.Title.TextContentAsync() == pageName)
                 ?? throw new ArgumentException($"Page '{pageName}' not found in the side navigation.");
 
-            await page.ClickAsync();
+            await page.Title.ClickAsync();
 
             var subPage = await page.SubPages.FirstOrDefaultAsync(async subPage => await subPage.TextContentAsync() == subPageName)
                 ?? throw new ArgumentException($"SubPage '{subPageName}' not found in the side navigation under page '{pageName}'.");
