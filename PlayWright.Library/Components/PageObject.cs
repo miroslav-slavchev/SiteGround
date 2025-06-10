@@ -2,7 +2,7 @@
 
 namespace PlayWright.Library.Components
 {
-    public class PageObject(SearchContext searchContext, By by) : UiComponent(searchContext, by)
+    public abstract class PageObject(SearchContext searchContext, By by) : UiContext(searchContext, by)
     {
         protected TPageObject InnerPageObject<TPageObject>(By? by = null) where TPageObject : PageObject
         {
@@ -44,5 +44,7 @@ namespace PlayWright.Library.Components
             UiElementList<TUiElement> elements = new(childSearchContext, by);
             return elements;
         }
+
+        public UiElement Target => new(SearchContext, By);
     }
 }

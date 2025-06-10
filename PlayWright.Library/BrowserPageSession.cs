@@ -2,7 +2,7 @@
 
 namespace PlayWright.Library
 {
-    public class BrowserSession(IPlaywright playwright, IPage page)
+    public class BrowserPageSession(IPlaywright playwright, IPage page)
     {
         public IPlaywright Playwright { get; } = playwright;
         public IBrowser Browser => Context.Browser!;

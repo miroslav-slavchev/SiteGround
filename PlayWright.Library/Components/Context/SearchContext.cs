@@ -8,9 +8,9 @@ namespace PlayWright.Library.Components.Context
     /// <param name="browserSession"> The browser session in which the search context operates.</param>
     /// <param name="parent">The parent locator in which the target one will be searched.</param>
     /// <param name="root">Represents the root element (usually that's the body.</param>
-    public class SearchContext(BrowserSession browserSession, ILocator? parent = null, ILocator? root = null)
+    public class SearchContext(BrowserPageSession browserSession, ILocator? parent = null, ILocator? root = null)
     {
-        public BrowserSession BrowserSession { get; } = browserSession;
+        public BrowserPageSession BrowserSession { get; } = browserSession;
 
         // These should be null only for the Root Element and in some exceptions
         public ILocator? ParentLocator { get; } = parent;
