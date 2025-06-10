@@ -1,4 +1,6 @@
-﻿namespace SiteGround.Tests
+﻿using SiteGround.Tests.Infrastructure.Assertions;
+
+namespace SiteGround.Tests
 {
     public class EmailTests : BaseTest
     {
@@ -8,6 +10,7 @@
             //Arrange
             const string domain = "site-tools-demo.net";
             const string accountName = "test_account";
+            const string email = $"{accountName}@{domain}";
 
             //Act
             await App.DashBoard.PinnedTools.EmailAccounts.ClickAsync();
@@ -21,22 +24,27 @@
             await App.EmailPage.Accounts.CreateNewEmailAccount.CreateAsync();
 
             //Assert
-            string expectedAccountName = $"{accountName}@{domain}";
+            Verify.All(async () =>
+            {
+                //Account AddOn
+                accountAddOn.Should().Be($"@{domain}", because: "AddOn should match the selected domain");
 
-            accountAddOn.Should().Be($"@{domain}", because: "AddOn should match the selected domain.");
+                //Password
+                filledPassword.Should().NotBeNullOrEmpty(because: "Clicking on 'Generate' button should fill the password input");
 
-            //Password
-            filledPassword.Should().NotBeNullOrEmpty(because: "Clicking on 'Geberate' button should fill the password input");
+                //Notification
+                var notification = await App.EmailPage.Accounts.CreateNewEmailAccount.Notification.PresentAsync();
+                notification.Should().NotBeNull(because: "notification presence is expected");
+                if (notification is not null)
+                {
+                    (await notification.Icon.IsSuccessAsync()).Should().BeTrue(because: "notification icon should be success");
+                    (await notification.Heading.Emphasis.TextContentAsync()).Should().Be(email, because: "account name presence is expected in notification text");
+                }
 
-            //Notification
-            var notification = await App.EmailPage.Accounts.CreateNewEmailAccount.Notification.PresentAsync();
-            notification.Should().NotBeNull(because: "notification presence is expected.");
-            (await notification?.Icon.IsSuccessAsync()).Should().BeTrue(because: "notification icon should be success.");
-            (await notification?.Heading.Emphasis.TextContentAsync()).Should().Be(expectedAccountName, because: "account name presence is expected in notification text.");
-
-            //Manage Email Accounts
-            var targetAccountRow = await App.EmailPage.Accounts.ManageEmailAccounts.Table.Rows.FirstOrDefaultAsync(async row => await row.AccountName.TextContentAsync() == expectedAccountName);
-            targetAccountRow.Should().NotBeNull(because: $"Account for {expectedAccountName} row should be present in the table after creation.");
+                //Manage Email Accounts
+                var targetAccountRow = await App.EmailPage.Accounts.ManageEmailAccounts.Table.Rows.FirstOrDefaultAsync(async row => await row.AccountName.TextContentAsync() == email);
+                targetAccountRow.Should().NotBeNull(because: $"Account for {email} row should be present in the table after creation");
+            });
         }
 
         [Test]
@@ -48,20 +56,26 @@
 
             //Act
             await App.SideNavigation.Email.ForwardersAsync();
-            var optionsElements = await App.EmailPage.Forwarders.SelectDomain.DropDown.OptionsAsync();
-            var options = await optionsElements.SelectAsync(option => option.TextContentAsync());
+            var options = await App.EmailPage.Forwarders.SelectDomain.DropDown.OptionsTextContentAsync();
             await App.EmailPage.Forwarders.SelectDomain.DropDown.SelectOptionAsync(domain);
             await App.EmailPage.Forwarders.CreateNewRule.Create.ClickAsync();
             var validationError = await App.EmailPage.Forwarders.CreateNewRule.ForwardAllMessagesSentTo.ValidationError.PresentAsync();
 
             //Assert
-            //Options
-            options.Should().BeEquivalentTo(expectedOptions, because: $"these are the expected options: {string.Join(",", expectedOptions)}");
+            Verify.All(async () =>
+            {
+                //Options
+                options.Should().BeEquivalentTo(expectedOptions, because: $"these are the expected options: {string.Join(",", expectedOptions)}");
 
-            //Validation Error
-            validationError.Should().NotBeNull(because: "Validation error should be present after clicking on 'Create' button with empty fields.");
-            (await validationError.Message.TextContentAsync()).Should().Be("Required field.", because: "Validation error message should match the expected text.");
-            (await validationError.Icon.IsErrorAttentionAsync()).Should().BeTrue(because: "Validation error icon should be 'error-attention' type.");
+                //Validation Error
+                validationError.Should().NotBeNull(because: "Validation error should be present after clicking on 'Create' button with empty fields");
+                if (validationError is not null)
+                {
+                    (await validationError.Message.TextContentAsync()).Should().Be("Required field.", because: "Validation error message should match the expected text");
+                    (await validationError.Icon.IsErrorAttentionAsync()).Should().BeTrue(because: "Validation error icon should be 'error-attention' type");
+                }
+            });
+
         }
     }
 }
