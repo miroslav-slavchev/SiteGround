@@ -1,6 +1,4 @@
 ﻿using Microsoft.Playwright;
-using PlayWright.Library;
-using SiteGround.Application;
 using SiteGround.Tests.Infrastructure.Configuration;
 
 namespace SiteGround.Tests

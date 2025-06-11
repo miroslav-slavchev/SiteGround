@@ -12,11 +12,11 @@ namespace SiteGround.Tests.Infrastructure.Assertions
             }
         }
 
-        public static async Task All(Task<Action> action)
+        public static Task All(Func<Task> action)
         {
             using (new AssertionScope())
             {
-                await action;
+                return action();
             }
         }
     }

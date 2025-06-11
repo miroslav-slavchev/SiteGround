@@ -24,7 +24,7 @@ namespace SiteGround.Tests
             await App.EmailPage.Accounts.CreateNewEmailAccount.ClickCreateButtonAsync();
 
             //Assert
-            Verify.All(async () =>
+            await Verify.All(async () =>
             {
                 //Account AddOn
                 accountAddOn.Should().Be($"@{domain}", because: "AddOn should match the selected domain");
@@ -62,7 +62,7 @@ namespace SiteGround.Tests
             var validationError = await App.EmailPage.Forwarders.CreateNewRule.ForwardAllMessagesSentTo.ValidationError.PresentAsync();
 
             //Assert
-            Verify.All(async () =>
+            await Verify.All(async () =>
             {
                 //Options
                 options.Should().BeEquivalentTo(expectedOptions, because: $"these are the expected options: {string.Join(",", expectedOptions)}");
