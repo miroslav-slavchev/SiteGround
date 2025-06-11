@@ -1,15 +1,15 @@
-Installation steps:
+**Installation steps:**
 
-Prerequisites:
+**Prerequisites:**
  - Powershell installed https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.5
  - .NET 8.0 installed
  - Visual Studio (if you want to run the test by Vs test explorer, debug, etc.)
 
-Playwright:
+**Playwright:**
  - Navigate to SiteGround.Tests project(folder) and open a terminal
  - run command: `pwsh bin/Debug/net8.0/playwright.ps1 install`
 
-Test Execution:
+**Test Execution:**
  - Command line:
    - Navigate to SiteGround solution (folder) and open a terminal.
    - run command `dotnet build`
